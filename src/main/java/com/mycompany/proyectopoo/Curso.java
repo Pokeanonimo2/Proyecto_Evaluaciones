@@ -158,6 +158,14 @@ public class Curso {
         return notas;
         
     }
+    
+    public void modificarCurso(String nombre, String modificacion){
+        for(int j=0; j < this.cursos.size; j++){
+            if(nombre == this.cursos.get(j).getNombreCurso()){
+                this.cursos.get(j).getNombreCurso() = nombre;
+                this.listaCursos(j) = nombre;
+        }
+    }    
     //Getters y Setters
     public String getNombreCurso() {
         return nombreCurso;
