@@ -40,7 +40,8 @@ public class Proyecto {
             System.out.println("---MENU PRINCIPAL---");
             System.out.println("[1] Impresión de datos");
             System.out.println("[2] Agregar/Llenar datos");
-            System.out.println("[3] Eliminar datos");
+            System.out.println("[3] Modificar datos");
+            System.out.println("[4] Eliminar datos")
             System.out.println("[0] Salir");
             System.out.println("Ingrese opción: ");
             opcion = lector.nextInt(); // Ingresan opcion            
@@ -410,18 +411,45 @@ public class Proyecto {
                     do
                     {
                         System.out.print("\n");
-                        System.out.println("Opcion: ELIMINAR DATOS");
-                        System.out.println("[1] Eliminar Alumno de Curso");
-                        System.out.println("[2] Agregar Asignatura a Curso");
-                        System.out.println("[3] Agregar Unidad a Asigantura");
-                        System.out.println("[4] Agregar Alumno a Curso");
-                        System.out.println("[5] Ingresar banco de preguntas");
-                        System.out.println("[0] Atras"); 
+                        System.out.println("Opcion: MODIFICAR DATOS");
+                        System.out.println("[1] Modificar Curso");
+                        System.out.println("[2] Modificar Asignatura");
+                        System.out.println("[3] Modificar Unidad");
+                        System.out.println("[0] Atras");
                         System.out.println("Ingrese opción: ");
                         opcion2 = lector.nextInt();         
                         lector.nextLine();
                         System.out.print("\n");
                     }while(atras);
+                    switch(opcion2){
+                        case 0: 
+                            atras = false;
+                            break;
+                        case 1:
+                            System.out.println("Opcion:   MODIFICAR UN CURSO DEL SISTEMA");
+                                do
+                                {
+                                    System.out.println("Cursos en el sistema:");
+                                    c.mostrarNombreCursos();
+                                    System.out.print("\n");
+                                    System.out.println("Ingrese nombre del Curso:");
+                                    nombreCurso = lector.nextLine();  
+                                    System.out.print("\n");
+                                    if(c.validarCurso(nombreCurso) == true)
+                                    {
+                                        do
+                                        {
+                                            System.out.println("¿Desea modificar el Curso " + "'"+nombreCurso+"'?");
+                                            System.out.println("Ingrese opción: (Si/No)");
+                                            respuesta = lector.nextLine().toLowerCase();
+                                        }while((respuesta.equals("no") != true) && (respuesta.equals("si") != true));
+                                    }else{
+                                        System.out.println("El Curso '"+ nombreCurso +"' no se encuentra ingresado en el sistema, intente nuevamente.");
+                                        respuesta = "no";
+                                    }
+                                }while (respuesta.equals("no"));
+                                c.modificar(nombreCurso);
+                                break;
                     break;
                 default:
                     System.out.println("Ingrese opción valida: ");
