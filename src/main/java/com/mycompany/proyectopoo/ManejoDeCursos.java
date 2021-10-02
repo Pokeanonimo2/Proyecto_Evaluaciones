@@ -152,7 +152,7 @@ public class ManejoDeCursos {
         }
     }
     
-    public void mostrarTodosAlumnos() {
+    public void mostrarAlumnos() {
         for (int i = 0; i < this.cursos.size(); i++ )
         {
             System.out.println("Alumnos de " + cursos.get(i).getNombreCurso()+ ": ");
@@ -169,7 +169,7 @@ public class ManejoDeCursos {
         }
     }
     
-    public void mostrarAlumnosCurso(String nombreCurso)
+    public void mostrarAlumnos(String nombreCurso)
     {
         for (int i = 0; i < this.cursos.size() ; i++ )
         {
