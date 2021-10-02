@@ -94,6 +94,10 @@ public class Curso {
     {
         this.mapaNotasAlumnos.put(rut, notas);
     }
+    public void guardarNotasCurso(ArrayList<Double> notas, String rut)
+    {
+        this.mapaNotasAlumnos.put(rut, notas);
+    }
     
     public ArrayList<String> getListaRuts ()
     {
