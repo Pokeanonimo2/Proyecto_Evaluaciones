@@ -64,6 +64,7 @@ public class Proyecto {
                         System.out.println("[4] Mostrar Asignaturas y Unidades de TODOS los cursos");
                         System.out.println("[5] Mostrar Asignaturas y Unidades de curso específico");
                         System.out.println("[6] Mostrar Notas de alumnos de un curso");
+                        System.out.println("[7] Generar reporte");
                         System.out.println("[0] Atrás"); 
                         System.out.println("Ingrese opción: ");
                         opcion2 = lector.nextInt();         
@@ -79,7 +80,7 @@ public class Proyecto {
                                 break;
                             case 2: 
                                 System.out.println("Opcion: IMPRESION DE TODOS LOS ALUMNOS");
-                                c.mostrarTodosAlumnos();
+                                c.mostrarAlumnos();
                                 break;
                             case 3:
                                 System.out.println("Opcion: IMPRESION DE LOS ALUMNOS DE UN CURSO ESPECIFICO");
@@ -92,7 +93,7 @@ public class Proyecto {
                                     nombreCurso = lector.nextLine();
                                     System.out.print("\n");
                                 }while(c.validarCurso(nombreCurso)== false);
-                                c.mostrarAlumnosCurso(nombreCurso);
+                                c.mostrarAlumnos(nombreCurso);
                                 break;
                             case 4: 
                                 System.out.println("Opción: IMPRESION DE ASIGNATURAS Y UNIDADES DE TODOS LOS CURSOS");
@@ -124,6 +125,10 @@ public class Proyecto {
                                 }while(c.validarCurso(nombreCurso)== false);
                                 c.mostrarNotasAlumnos(nombreCurso);
                                 break;
+                            case 7:
+                                System.out.println("Opción: GENERAR REPORTE");
+                                System.out.print("\n");
+                                generarReporte(c);
                             default:
                                 System.out.println("Ingrese opción válida:");
                                 opcion2 = lector.nextInt();
@@ -300,7 +305,7 @@ public class Proyecto {
                                 do
                                 {
                                     System.out.println("Alumnos en el Curso "+ nombreCurso +":");
-                                    c.mostrarAlumnosCurso(nombreCurso);
+                                    c.mostrarAlumnos(nombreCurso);
                                     System.out.print("\n");
                                     System.out.println("Ingrese rut de alumno a añadir al curso " + nombreCurso + " (sin puntos y con guión):");
                                     datoAGuardar = lector.nextLine();
@@ -428,7 +433,7 @@ public class Proyecto {
                                 {
                                     System.out.println("Opcion: ELIMINAR ALUMNO DE CURSO");
                                     System.out.println("Alumnos en el sistema: ");
-                                    c.mostrarTodosAlumnos();
+                                    c.mostrarAlumnos();
                                     System.out.print("\n");
                                     System.out.println("Ingrese RUT del alumno sin puntos y con guión (Ej:20132111-k)():");
                                     rutAlumno = lector.nextLine();  
@@ -481,7 +486,7 @@ public class Proyecto {
                                 {
                                     System.out.println("Opcion: MODIFICAR RUT DE ALUMNO DE CURSO");
                                     System.out.println("Alumnos en el sistema: ");
-                                    c.mostrarTodosAlumnos();
+                                    c.mostrarAlumnos();
                                     System.out.print("\n");
                                     System.out.println("Ingrese RUT del alumno sin puntos y con guión (Ej:20132111-k)():");
                                     rutAlumno = lector.nextLine();  
@@ -643,35 +648,5 @@ public class Proyecto {
             ex.printStackTrace();
         }
     }
-    public static void opcionImpresion()
-    {
-        
-    }
+    
 }
-/*
-modelo de submenus
-atras=true;
-do{
-    // subMenu
-    System.out.print("\n");
-    System.out.println("Opcion:");
-    System.out.println("1. Ingresar banco de preguntas");
-    System.out.println("0. Atras"); 
-    opcion2 = lector.nextInt();         
-    lector.nextLine();
-    System.out.print("\n");
-    switch (opcion2){
-        case 0: 
-            atras=false;
-            break;
-        case 1:
-            break;
-        default:
-            System.out.println("Ingrese opcion valida:");
-            opcion2 = lector.nextInt();
-    }
-}while(atras);
-break;
-
-
-*/
