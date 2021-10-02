@@ -38,7 +38,7 @@ public class Proyecto {
         do{
             
             // Menu
-            System.out.println("---MENÚ PRINCIPAL---");
+            System.out.println("---MENU PRINCIPAL---");
             System.out.println("[1] Impresión de datos");
             System.out.println("[2] Agregar/Llenar datos");
             System.out.println("[3] Eliminar datos");
@@ -64,6 +64,7 @@ public class Proyecto {
                         System.out.println("[4] Mostrar Asignaturas y Unidades de TODOS los cursos");
                         System.out.println("[5] Mostrar Asignaturas y Unidades de curso específico");
                         System.out.println("[6] Mostrar Notas de alumnos de un curso");
+                        System.out.println("[7] Generar reporte");
                         System.out.println("[0] Atrás"); 
                         System.out.println("Ingrese opción: ");
                         opcion2 = lector.nextInt();         
@@ -112,7 +113,7 @@ public class Proyecto {
                                 c.mostrarAsigYUnidadesCurso(nombreCurso);
                                 break;
                             case 6:
-                                System.out.println("Opción: IMPRESION DE NOTAS DE UN CURSO ESPECÍFICO");
+                                System.out.println("Opción: IMPRESION DE ASIGNATURAS Y UNIDADES DE UN CURSO ESPECÍFICO");
                                 do
                                 {
                                     System.out.println("Cursos en el sistema:");
@@ -124,6 +125,10 @@ public class Proyecto {
                                 }while(c.validarCurso(nombreCurso)== false);
                                 c.mostrarNotasAlumnos(nombreCurso);
                                 break;
+                            case 7:
+                                System.out.println("Opción: GENERAR REPORTE");
+                                System.out.print("\n");
+                                generarReporte( c );
                             default:
                                 System.out.println("Ingrese opción válida:");
                                 opcion2 = lector.nextInt();
@@ -414,6 +419,8 @@ public class Proyecto {
                         System.out.print("\n");
                         System.out.println("Opcion: ELIMINAR DATOS");
                         System.out.println("[1] Eliminar Alumno de Curso");
+                        System.out.println("[2] Eliminar Unidad");
+                        System.out.println("[3] Eliminar Asignatura");
                         System.out.println("[0] Atrás"); 
                         System.out.println("Ingrese opción: ");
                         opcion2 = lector.nextInt();         
@@ -421,7 +428,7 @@ public class Proyecto {
                         System.out.print("\n");
                         switch (opcion2){
                             case 0:
-                                atras=false;
+                                atras = false;
                                 break;
                             case 1:
                                 do
@@ -433,11 +440,6 @@ public class Proyecto {
                                     System.out.println("Ingrese RUT del alumno sin puntos y con guión (Ej:20132111-k)():");
                                     rutAlumno = lector.nextLine();  
                                     System.out.print("\n");
-                                    if (c.validarAlumno(rutAlumno)!=true) 
-                                    {
-                                        System.out.println("'"+rutAlumno+"' no fue encontrado en el sistema ");
-                                        System.out.print("\n");
-                                    }
                                 }while( c.validarAlumno(rutAlumno)!=true);
                                 System.out.println("Alumno "+ rutAlumno+ " fue encontrado en el Curso " + c.buscarAlumno(rutAlumno));
                                 do
@@ -455,66 +457,59 @@ public class Proyecto {
                                     }
                                 }
                                 break;
-                        }
                                 
-                    }while(atras);
-                    break;
-                    
-                case 4: //modificar
-                    atras=true;
-                    do
-                    {
-                        System.out.print("\n");
-                        System.out.println("Opcion: MODIFICAR DATOS");
-                        System.out.println("[1] Modificar RUT Alumno de Curso");
-                        System.out.println("[0] Atrás"); 
-                        System.out.println("Ingrese opción: ");
-                        opcion2 = lector.nextInt();         
-                        lector.nextLine();
-                        System.out.print("\n");
-                        switch (opcion2){
-                            case 0:
-                                atras=false;
-                                break;
-                            case 1:
+                            case 2:
+                                System.out.println("Opcion: ELIMINAR UNIDAD A ASIGNATURA");
+                                System.out.println("Para eliminar una Unidad, debe especificar Curso y Asignatura");
                                 do
                                 {
-                                    System.out.println("Opcion: MODIFICAR RUT DE ALUMNO DE CURSO");
-                                    System.out.println("Alumnos en el sistema: ");
-                                    c.mostrarTodosAlumnos();
+                                    System.out.println("Cursos en el sistema:");
+                                    c.mostrarNombreCursos();
                                     System.out.print("\n");
-                                    System.out.println("Ingrese RUT del alumno sin puntos y con guión (Ej:20132111-k)():");
-                                    rutAlumno = lector.nextLine();  
+                                    System.out.println("Ingrese Curso de la Asignatura:");
+                                    nombreCurso = lector.nextLine();  
                                     System.out.print("\n");
-                                }while( c.validarAlumno(rutAlumno)!=true);
-                                System.out.println("Alumno "+ rutAlumno+ " fue encontrado en el Curso " + c.buscarAlumno(rutAlumno));
-                                do
+                                }while(c.validarCurso(nombreCurso) == false);
+                                if(c.verificarAsigDeCurso(nombreCurso))
                                 {
-                                    do{
-                                        System.out.println("Ingrese nuevo rut para modificar el anterior ("+ rutAlumno+"):");
-                                        datoAGuardar=lector.nextLine();
-                                        if (c.validarAlumno(datoAGuardar)) System.out.println("El rut '"+ datoAGuardar + "' ya existe en el sistema.");
-                                        System.out.print("\n");
-                                    }while( c.validarAlumno(datoAGuardar)!=false);
-                                    System.out.println("'"+datoAGuardar+"' no fue encontrado en el sistema ");
-                                    System.out.print("\n");
                                     do
                                     {
-                                        System.out.println("¿Desea modificar el rut " + "'"+rutAlumno+"' por el rut '"+datoAGuardar+"'?" +"(esta acción será permanente)");
-                                        System.out.println("Ingrese opción: (Si/No)");
-                                        respuesta=lector.nextLine().toLowerCase();
-                                    }while((respuesta.equals("no") != true) && (respuesta.equals("si") != true)); 
-                                }while (respuesta.equals("no"));
-                                
-                                if (respuesta.equals("si")){
-                                    if(c.replaceAlumno(rutAlumno,datoAGuardar))
+                                        System.out.println("Asginaturas del Curso "+ nombreCurso+":");
+                                        c.mostrarNombresAsig(nombreCurso);
+                                        System.out.print("\n");
+                                        System.out.println("Ingrese Asignatura de la Unidad:");
+                                        nombreAsig = lector.nextLine();
+                                        System.out.print("\n");
+                                    }while(c.validarAsignatura(nombreCurso,nombreAsig) == false);
+                                    do
                                     {
-                                        System.out.println("El rut '" + rutAlumno + "' ha sido modificado por '" + datoAGuardar+"'.");
-                                    }else{
-                                        System.out.println("Alumno '" + rutAlumno + "' no se ha podido modificar.");
-                                    }
+                                        System.out.println("Unidades en la Asignatura "+ nombreAsig +":");
+                                        c.mostrarNombresUnidades(nombreCurso,nombreAsig);
+                                        System.out.print("\n");
+                                        System.out.println("Ingrese Unidad a eliminar de la Asignatura " + nombreAsig + " (SIN ESPACIOS, ej: RevolucionIndustrial) :");
+                                        datoAGuardar = lector.nextLine();
+                                        System.out.print("\n");
+                                        if(c.validarUnidad(nombreCurso,nombreAsig, datoAGuardar) == false)
+                                        {
+                                            do
+                                            {
+                                                System.out.println("¿Desea eliminar la Unidad " + "'"+datoAGuardar+"'?");
+                                                System.out.println("Ingrese opción: (Si/No)");
+                                                respuesta = lector.nextLine().toLowerCase();
+                                            }while((respuesta.equals("no") != true) && (respuesta.equals("si") != true));
+                                        }else{
+                                            System.out.println("La Unidad '"+ datoAGuardar +"' ya se encuentra ingresado en "+ nombreAsig +", intente nuevamente.");
+                                            respuesta = "no";
+                                        }
+                                    }while (respuesta.equals("no"));
+                                    c.deleteUnidad(nombreCurso,nombreAsig,datoAGuardar);
+                                    System.out.println("Unidad ingresada.");
+                                }else
+                                {
+                                    System.out.println("El curso ingresado no tiene Asignaturas, por favor ingrese al menos una.");
                                 }
-                                break;
+                            break;
+                            case 3:
                         }
                                 
                     }while(atras);
@@ -523,6 +518,24 @@ public class Proyecto {
                     System.out.println("Ingrese opción valida: ");
                     opcion = lector.nextInt();
             }
+            case 4:// modificacion
+            atras=true;
+                    do
+                    {
+                        System.out.print("\n");
+                        System.out.println("Opcion: MODIFICAR DATOS");
+                        System.out.println("[1] Modificar Alumno de Curso");
+                        System.out.println("[2] Modificar Unidad");
+                        System.out.println("[3] Modificar Asignatura");
+                        System.out.println("[0] Atrás"); 
+                        System.out.println("Ingrese opción: ");
+                        opcion2 = lector.nextInt();         
+                        lector.nextLine();
+                        System.out.print("\n");
+                        switch (opcion2){
+                    }while(atras);
+                    break;
+            
             
         }while(salir);
     }
